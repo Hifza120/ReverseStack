@@ -1,0 +1,62 @@
+#include"StackADT.h"
+template<typename T>
+class Stack :public StackADT<T> {
+public:
+	Stack() {}
+	Stack(int m = 5) :StackADT<T>(m) {}
+	Stack(const Stack<T>& S1)
+	{
+		StackADT<T>::currentSize = S1.StackADT<T>::currentSize;
+		StackADT<T>::maxSize = S1.StackADT<T>::maxSize;
+		StackADT<T>::array = new T[StackADT<T>::maxSize];
+		for (int i = 0; i < S1.StackADT<T>::currentSize; i++) {
+			StackADT<T>::array[i] = S1.StackADT<T>::array[i];
+		}
+
+	}
+	bool isEmpty()override {
+		return StackADT<T>::currentSize == 0;
+	}
+	bool isFull()override {
+		return StackADT<T>::currentSize == StackADT<T>::maxSize;
+	}
+	void push(T value)override {
+		if (StackADT<T>::currentSize == StackADT<T>::maxSize) {
+			cout << "STACK IS FULL" << endl;
+		}
+		else
+		{
+			StackADT<T>::array[StackADT<T>::currentSize++] = value;
+		}
+	}
+	T pop()override {
+		if (StackADT<T>::currentSize == 0) {
+			cout << "STACK IS EMPTY" << endl;
+			return T();
+		}
+		else
+		{
+		return	StackADT<T>::array[--StackADT<T>::currentSize];
+		}
+
+	}
+	T top()const override{
+		if (StackADT<T>::currentSize == 0) {
+			cout << "STACK IS EMPTY" << endl;
+			return T();
+		}
+		else
+		{
+			return	StackADT<T>::array[StackADT<T>::currentSize-1];
+		}
+
+
+	}
+
+	void display() {
+		for (int i = 0; i < StackADT<T>::currentSize; i++) {
+			cout << StackADT<T>::array[i];
+		}
+		cout << endl;
+	}
+};

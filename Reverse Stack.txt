@@ -1,0 +1,40 @@
+#include"Stack.h"
+template<typename T>
+Stack<T>   reverse(Stack<T>& S) {
+	Stack<T> temp(S);
+	int Size = 0;
+	T value = 0;
+	while (temp.isEmpty() == 0) {
+		value = temp.pop();
+		Size++;
+	}
+	Stack<T> temp1(S);
+	Stack<T> S2(Size);
+	for (int i = 0; i < Size; i++) {
+		value = temp1.pop();
+		S2.push(value);
+	}
+	return S2;
+}
+
+
+int main() {
+	Stack<char> S(20);
+	S.push('C');
+	S.push('H');
+	S.push('A');
+	S.push('R');
+	S.push('A');
+	S.push('C');
+	S.push('T');
+	S.push('E');
+	S.push('R');
+	cout << " Original " << endl;
+	S.display();
+	Stack<char> S2 = reverse(S);
+	cout << " Original " << endl;
+	S.display();
+	cout << " Reverse " << endl;
+	S2.display();
+	return 0;
+}
